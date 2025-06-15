@@ -91,97 +91,83 @@ function handleLogout() {
       {/* Header */}
       <header className="flex justify-between items-center px-8 py-4 bg-black bg-opacity-30">
         <h1 className="text-3xl font-bold">WorkTracker</h1>
-        <nav>
-          {/* {!token ? (
-            <>
-              <button
-                onClick={() => setShowLogin(true)}
-                className={`mr-4 px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-black transition ${
-                  showLogin ? "bg-white text-black" : "bg-transparent"
-                }`}
-              >
-                Login
-              </button>
-              <button
-                onClick={() => setShowLogin(false)}
-                className={`px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-black transition ${
-                  !showLogin ? "bg-white text-black" : "bg-transparent"
-                }`}
-              >
-                Register
-              </button>
-            </>
-          ) : (
-            <button
-              onClick={handleLogout}
-              className="px-4 py-2 rounded-md font-semibold bg-red-600 hover:bg-red-700 transition"
-            >
-              Logout
-            </button>
-          )} */}
 
-{!token ? (
-  <>
-    {showForgotPassword ? (
-      <button
-        onClick={() => setShowForgotPassword(false)}
-        className="mr-4 px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-black transition bg-white text-black"
-      >
-        Back to Login
-      </button>
-    ) : (
-      <>
+
+      <nav>
+  {!token ? (
+    <>
+      {showForgotPassword ? (
         <button
-          onClick={() => { setShowLogin(true); setShowForgotPassword(false); }}
-          className={`mr-4 px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-black transition ${
-            showLogin ? "bg-white text-black" : "bg-transparent"
-          }`}
+          onClick={() => setShowForgotPassword(false)}
+          className="mb-2 px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-black transition bg-white text-black w-full sm:w-auto"
         >
-          Login
+          Back to Login
         </button>
-        <button
-          onClick={() => { setShowLogin(false); setShowForgotPassword(false); }}
-          className={`px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-black transition ${
-            !showLogin ? "bg-white text-black" : "bg-transparent"
-          }`}
-        >
-          Register
-        </button>
-      </>
-    )}
-  </>
-) : (
-  <button
-    onClick={handleLogout}
-    className="px-4 py-2 rounded-md font-semibold bg-red-600 hover:bg-red-700 transition"
-  >
-    Logout
-  </button>
-)}
+      ) : (
+        <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
+          <button
+            onClick={() => { setShowLogin(true); setShowForgotPassword(false); }}
+            className={`px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-black transition w-full sm:w-auto ${
+              showLogin ? "bg-white text-black" : "bg-transparent"
+            }`}
+          >
+            Login
+          </button>
+          <button
+            onClick={() => { setShowLogin(false); setShowForgotPassword(false); }}
+            className={`px-4 py-2 rounded-md font-semibold hover:bg-white hover:text-black transition w-full sm:w-auto ${
+              !showLogin ? "bg-white text-black" : "bg-transparent"
+            }`}
+          >
+            Register
+          </button>
+        </div>
+      )}
+    </>
+  ) : (
+    <button
+      onClick={handleLogout}
+      className="px-4 py-2 rounded-md font-semibold bg-red-600 hover:bg-red-700 transition w-full sm:w-auto"
+    >
+      Logout
+    </button>
+  )}
+</nav>
 
 
 
 
-        </nav>
       </header>
 
-      
-<main className="flex-grow flex flex-col items-center justify-center px-4 text-black">
-  <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-10 max-w-md w-full">
-    {token ? (
-      userEmail === "suriyaprakash@aactni.edu.in" ? (
+
+
+
+   <main className="flex-grow flex flex-col items-center justify-center px-4 text-black">
+  {token ? (
+    userEmail === "suriyaprakash@aactni.edu.in" ? (
+      // Full-width layout for Admin
+      <div className="w-full">
         <AdminPage />
-      ) : (
-        <Dashboard userEmail={userEmail} />
-      )
-    ) : showForgotPassword ? (
-      <ForgotPassword setShowForgotPassword={setShowForgotPassword} />
-    ) : showLogin ? (
-      <Login onLogin={handleLogin} setShowForgotPassword={setShowForgotPassword} />
+      </div>
     ) : (
+      // Centered layout for normal user
+      <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-10 max-w-md w-full">
+        <Dashboard userEmail={userEmail} />
+      </div>
+    )
+  ) : showForgotPassword ? (
+    <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-10 max-w-md w-full">
+      <ForgotPassword setShowForgotPassword={setShowForgotPassword} />
+    </div>
+  ) : showLogin ? (
+    <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-10 max-w-md w-full">
+      <Login onLogin={handleLogin} setShowForgotPassword={setShowForgotPassword} />
+    </div>
+  ) : (
+    <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-10 max-w-md w-full">
       <Register />
-    )}
-  </div>
+    </div>
+  )}
 </main>
 
 

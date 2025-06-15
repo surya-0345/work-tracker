@@ -28,10 +28,6 @@ export default function Login({ onLogin, setShowForgotPassword }) {
 
   return (
 
-   
-
-
-
     <form onSubmit={handleLogin} className="flex flex-col space-y-5">
       <h2 className="text-3xl font-bold text-center text-gray-800">Login</h2>
       <input
